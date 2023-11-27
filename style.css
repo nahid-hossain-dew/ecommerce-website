@@ -73,14 +73,24 @@ input {
   flex-direction: column;
   gap: 0.5rem;
 }
+.items-container .products .product .details .price-quantity {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.items-container .products .product .details .price-quantity .quantity {
+  display: flex;
+  gap: 0.5rem;
+}
 .items-container .products .product .details h3 {
   font-size: 1.2rem;
 }
 .items-container .products .product .details h4 {
   font-size: 1rem;
+  color: grey;
 }
 .items-container .products .btn {
-  background-color: aqua;
+  background-color: rgb(208, 204, 204);
   outline: none;
   border: none;
   padding: 0.5rem 1rem;
