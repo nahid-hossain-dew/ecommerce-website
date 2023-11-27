@@ -13,8 +13,9 @@ fetch(URL)
     .then(data => {
         // +++++++display Products++++++=
         let displayProducts = (data) => {
-            return products.innerHTML = data.map((x) => {              
+            return products.innerHTML = data.map((x) => {
                 let { id,image, title, category, price } = x;
+                let search= basket.find((x)=> x.id === id);
                 return `<div class="product">
              <div class="img-container">
               <img src="${image}" alt="">
@@ -26,7 +27,7 @@ fetch(URL)
                         <p class="price">$ ${price}</p>
                         <div class="quantity">
                             <i onclick="decrement(${id})"  class="fa-solid fa-minus"></i>
-                            <div id="${id}">0</div>
+                            <div id="${id}">${search === undefined ? 0 : search.item }</div>
                             <i onclick="increment(${id})"  class="fa-solid fa-plus"></i>
                         </div>
                     </div>                
@@ -87,7 +88,7 @@ fetch(URL)
 
 
 // ++++++++ quantity functionality+++++++++=  
-    let basket=[] ;
+    let basket= JSON.parse(localStorage.getItem("data"))|| [] ;
     let increment=(id)=>{
        let selectedItem=id;
        let search=basket.find((x)=>x.id===selectedItem);
@@ -100,15 +101,18 @@ fetch(URL)
             search.item+=1;
         }      
       update(selectedItem);
+      localStorage.setItem("data",JSON.stringify(basket));
     }; 
     let decrement=(id)=>{
         let selectedItem=id;
         let search=basket.find((x)=>x.id===selectedItem);
-         if(search.item=== 0)return
-         else{
+        if(search=== undefined) return;
+        else if(search.item=== 0) return;
+        else{
              search.item -=1;
          }
          update(selectedItem);
+         localStorage.setItem("data",JSON.stringify(basket));
     };
     let update=(id)=>{
         let search = basket.find((x)=> x.id===id);       
