@@ -112,6 +112,7 @@ fetch(URL)
              search.item -=1;
          }
          update(selectedItem);
+         basket= basket.filter((x)=> x.item !== 0);
          localStorage.setItem("data",JSON.stringify(basket));
     };
     let update=(id)=>{
